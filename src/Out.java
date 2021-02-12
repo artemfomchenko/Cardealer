@@ -33,7 +33,22 @@ public class Out {
         }
     }
 
-
+    public void removeCar (ArrayList<Cars> carsList, String pathToFile) throws IOException {
+        ArrayList<Cars> test = new ArrayList<>();
+        Writer write = new FileWriter(pathToFile);
+        Scanner numberDelete = new Scanner(System.in);
+        System.out.println("Введите индекс удаляемого автомобиля:");
+        int indexDelete = numberDelete.nextInt();
+        int firstCarIndex = 1;
+        for (Cars value : carsList) {
+            if (value.getIndex()!=indexDelete) {
+                test.add(value);
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+            }
+        }
+        write.close();
+    }
 
 //    public void removeCar (ArrayList<Cars> carsList, String pathToFile) {
 //        Iterator<Cars> carsIterator = carsList.iterator();
@@ -42,8 +57,9 @@ public class Out {
 //        int indexSize = numberDelete.nextInt();
 //        int indexDelete = indexSize - 1;
 //        while (carsIterator.hasNext()) {
-//            Cars cars = new Cars();
-//
+//            System.out.println("------");
+//            System.out.println(carsIterator.next());
+//            System.out.println("++++");
 //            Object o = carsIterator.next();
 //            if (o.equals(indexDelete)) {
 //                carsIterator.remove();

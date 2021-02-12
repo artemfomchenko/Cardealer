@@ -106,18 +106,21 @@ public class Main {
                                 switch (numberSalonDel) {
                                     case 1:
                                         System.out.println("*** Автосалон Audi ***");
+                                        listAudi = out.getCarsList(pathToAudiFile);
                                         out.printAllCars(listAudi);
-                                        //
+                                        out.removeCar(listAudi, pathToAudiFile);
                                         break;
                                     case 2:
                                         System.out.println("*** Автосалон BMW ***");
+                                        listBmw = out.getCarsList(pathToBMWFile);
                                         out.printAllCars(listBmw);
-                                        //
+                                        out.removeCar(listBmw, pathToBMWFile);
                                         break;
                                     case 3:
                                         System.out.println("*** Автосалон Volkswagen ***");
+                                        listVolkswagen = out.getCarsList(pathToVolkswagenFile);
                                         out.printAllCars(listVolkswagen);
-                                        //
+                                        out.removeCar(listVolkswagen, pathToVolkswagenFile);
                                         break;
                                     case 4:
                                         //Назад в главное меню

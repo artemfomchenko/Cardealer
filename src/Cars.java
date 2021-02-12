@@ -86,7 +86,6 @@ public class Cars {
         boolean run = true;
         String pathToCarsList = pathToFile;
         Writer write = new FileWriter(pathToCarsList, true);
-        Out out = new Out();
 
         while (run) {
             System.out.println("Введите марку: ");
