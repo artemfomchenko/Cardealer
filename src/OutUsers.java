@@ -31,20 +31,21 @@ public class OutUsers {
         }
     }
 
-//    public void removeUser (ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
-//        ArrayList<Users> testing = new ArrayList<>();
-//        Writer write = new FileWriter(pathToFile);
-//        Scanner numberDelete = new Scanner(System.in);
-//        System.out.println("Введите индекс удаляемого пользователя(аккаунта):");
-//        int indexDelete = numberDelete.nextInt();
-//        int firstUserIndex = 1;
-//        for (Cars value : listUsers) {
-//            if (value.getIndex()!=indexDelete) {
-//                testing.add(value);
-//                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
-//                firstUserIndex++;
-//            }
-//        }
-//        write.close();
-//    }
+    public void removeUser (ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
+        ArrayList<Users> listUsersAfterDelete = new ArrayList<>();
+        Writer write = new FileWriter(pathToUserFile);
+        Scanner numberDelete = new Scanner(System.in);
+        System.out.println("Введите индекс удаляемого пользователя(аккаунта):");
+        int indexDelete = numberDelete.nextInt();
+        int firstUserIndex = 1;
+        for (Users value : listUsers) {
+            if (value.getIndex()!=indexDelete) {
+                listUsersAfterDelete.add(value);
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
+            }
+        }
+        write.close();
+        System.out.println("Аккаунт удалён из базы.");
+    }
 }

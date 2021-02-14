@@ -142,10 +142,8 @@ public class Main {
                                 //logic
                                 break;
                             case 5://Список зарегестрированнных пользователей
-                                //Список пользователей:
-                                //id: value
-                                //Логин value
-                                //isAdmin = true/false
+                                listUsers = outUsers.getUserList(pathToUserFile);
+                                outUsers.printAllUser(listUsers);
                                 System.out.println("Выберите действие: \n"
                                         + "1. Удалить пользователя\n"
                                         + "2. Дать права администратора\n"
@@ -153,7 +151,7 @@ public class Main {
                                 int numberUser = in.nextInt();
                                 switch (numberUser) {
                                     case 1:
-                                        //
+                                        outUsers.removeUser(listUsers, pathToUserFile);
                                         break;
                                     case 2:
                                         //

@@ -34,7 +34,7 @@ public class OutCars {
     }
 
     public void removeCar (ArrayList<Cars> carsList, String pathToFile) throws IOException {
-        ArrayList<Cars> test = new ArrayList<>();
+        ArrayList<Cars> carsListAfterDelete = new ArrayList<>();
         Writer write = new FileWriter(pathToFile);
         Scanner numberDelete = new Scanner(System.in);
         System.out.println("Введите индекс удаляемого автомобиля:");
@@ -42,11 +42,12 @@ public class OutCars {
         int firstCarIndex = 1;
         for (Cars value : carsList) {
             if (value.getIndex()!=indexDelete) {
-                test.add(value);
+                carsListAfterDelete.add(value);
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
             }
         }
         write.close();
+        System.out.println("Авто удалено из базы.");
     }
 }

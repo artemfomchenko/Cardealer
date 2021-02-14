@@ -13,7 +13,7 @@ public class Users {
     public String toString() {
         return  "id: " + index + "\n"
                 + "Логин: " + userName + "\n"
-                + "Пароль: " + password + "\n"
+                //+ "Пароль: " + password + "\n" //убрал видимость паролей аккаунтов у админа
                 + "Администратор: " + isAdmin + "\n";
     }
 
