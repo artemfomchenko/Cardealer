@@ -12,10 +12,12 @@ public class Cars {
     private String color;
     private int year;
     private int price;
+    private boolean order;
 
     @Override
     public String toString() {
-        return "Марка: " + brand + "\n"
+        return "Id: " + index + "\n"
+                + "Марка: " + brand + "\n"
                 + "Модель: " + model + "\n"
                 + "Цвет: " + color + "\n"
                 + "Год выпуска: " + year + "\n"
@@ -67,7 +69,6 @@ public class Cars {
     public int getPrice() {
         return price;
     }
-    //
 
     public void setPrice(int price) {
         this.price = price;
@@ -81,7 +82,16 @@ public class Cars {
         this.index = index;
     }
 
-    public void addCars(String pathToFile, int listLenght) throws IOException {
+    public boolean getOrder() {
+        return order;
+    }
+
+    public void setOrder(boolean order) {
+        this.order = order;
+    }
+
+
+    public void addCars(String pathToFile, int listLength) throws IOException {
         Scanner input = new Scanner(System.in);
         boolean run = true;
         String pathToCarsList = pathToFile;
@@ -104,8 +114,8 @@ public class Cars {
             int price = input.nextInt();
             setPrice(price);
 
-            listLenght++;
-            write.write("{\n"+ toStringAdmin(listLenght) + "},\n");
+            listLength++;
+            write.write("{\n"+ toStringAdmin(listLength) + "},\n");
             input.nextLine();//
             System.out.println("Авто добавлено! Добавить еще? (Да/Нет):");
 

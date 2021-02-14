@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Users {
     private int index;
@@ -9,15 +11,14 @@ public class Users {
 
     @Override
     public String toString() {
-        return "{\n"
-                + "Пользователь: " + userName + "\n"
+        return  "id: " + index + "\n"
+                + "Логин: " + userName + "\n"
                 + "Пароль: " + password + "\n"
-                + "Администратор: " + isAdmin + "\n"
-                + "},\n";
+                + "Администратор: " + isAdmin + "\n";
     }
 
-    public String toStringUserAdmin(int userLenght) {
-        return  "Индекс: " + userLenght + "\n"
+    public String toStringUserAdmin(int userLength) {
+        return  "Индекс: " + userLength + "\n"
                 + "Логин: " + userName + "\n"
                 + "Пароль: " + password + "\n"
                 + "Администратор: " + isAdmin + "\n";
@@ -55,17 +56,20 @@ public class Users {
         this.index = index;
     }
 
-    public void registration() throws IOException {
+    public void registration(int userLength) throws IOException {
         Scanner input = new Scanner(System.in);
         System.out.println("Введите имя пользователя:");
         setUserName(input.nextLine());
         System.out.println("Введите пароль:");
         setPassword(input.nextLine());
-        //userLenght++;
+        userLength++;
+
         String pathToUserList = "E://IdeaProjects/CarDealer/Users/listOfUsers.txt";
         Writer write = new FileWriter(pathToUserList, true);
-        write.write(toString());
+        write.write("{\n"+ toStringUserAdmin(userLength) + "},\n");
         write.close();
+        System.out.println("Вы успешно зарегистрированы!\n" +
+                            "Выберите действие:");
     }
 
     public String login() {
@@ -84,10 +88,11 @@ public class Users {
 
             while ((line = read.readLine()) != null && !correctLogin) {
                 if (line.equals("{")) {
-                    String dbUser = read.readLine().replaceAll("Пользователь: ", "").trim();
+                    int dbIndex = Integer.parseInt(read.readLine().replaceAll("Индекс: ", "").trim());
+                    String dbUser = read.readLine().replaceAll("Логин: ", "").trim();
                     String dbPassword = read.readLine().replaceAll("Пароль: ", "").trim();
                     String DBIsAdmin = read.readLine().replaceAll("Администратор: ", "").trim();
-                    if (username.equals(dbUser) && password.equals(dbPassword)) {
+                    if (dbIndex == dbIndex && username.equals(dbUser) && password.equals(dbPassword)) {
                         if (DBIsAdmin.equals("true")) {
                             correctLogin = true;
                             userType = "admin";

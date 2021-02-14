@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -10,18 +9,22 @@ public class Main {
         String pathToBMWFile = "E://IdeaProjects/CarDealer/Cars/listCarsBmw.txt";
         String pathToVolkswagenFile = "E://IdeaProjects/CarDealer/Cars/listCarsVolkswagen.txt";
 
-        System.out.println("\t\t***** Добро пожаловать! *****");
-
-        int option = 0;
-
-        Out out = new Out();
-        ArrayList<Cars> listAudi = out.getCarsList(pathToAudiFile);
-        ArrayList<Cars> listBmw = out.getCarsList(pathToBMWFile);
-        ArrayList<Cars> listVolkswagen = out.getCarsList(pathToVolkswagenFile);
+        OutCars outCars = new OutCars();
+        ArrayList<Cars> listAudi = outCars.getCarsList(pathToAudiFile);
+        ArrayList<Cars> listBmw = outCars.getCarsList(pathToBMWFile);
+        ArrayList<Cars> listVolkswagen = outCars.getCarsList(pathToVolkswagenFile);
         SortModel sortModel = new SortModel();
         SortColor sortColor = new SortColor();
         SortYear sortYear = new SortYear();
         SortPrice sortPrice = new SortPrice();
+
+        String pathToUserFile = "E://IdeaProjects/CarDealer/Users/listOfUsers.txt";
+        OutUsers outUsers = new OutUsers();
+        ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
+
+        int option = 0;
+
+        System.out.println("\t\t***** Добро пожаловать! *****");
 
         while (option != 3) {
             System.out.println("1. Вход\n" + "2. Регистрация\n" + "3. Выход\n");
@@ -38,9 +41,9 @@ public class Main {
                     if (userType.equals("admin")) {
                         Cars cars = new Cars();
                         System.out.println("Вы вошли как администратор. \nВыберите раздел: \n"
-                                + "1. Список автомобилей\n"//вывод с индексом, вроде выводило же
+                                + "1. Список автомобилей\n"
                                 + "2. Добавить автомобиль\n"
-                                + "3. Удалить автомобиль\n"//
+                                + "3. Удалить автомобиль\n"
                                 + "4. Список забронированных автомобилей\n"//бронирование
                                 + "5. Список зарегестрированных пользователей\n");//удалить пользователя/дать права админа
                         int numberAdm = in.nextInt();
@@ -49,20 +52,22 @@ public class Main {
                                 System.out.println("Выберите автосалон: \n"
                                         + "1. Audi\n"
                                         + "2. BMW\n"
-                                        + "3. Volkswagen\n");
+                                        + "3. Volkswagen\n"
+                                        + "\n"
+                                        + "4. Назад");
                                 int numberSalon = in.nextInt();
                                 switch (numberSalon) {
                                     case 1:
                                         System.out.println("*** Автосалон Audi ***");
-                                        out.printAllCars(listAudi);
+                                        outCars.printAllCars(listAudi);
                                         break;
                                     case 2:
                                         System.out.println("*** Автосалон BMW ***");
-                                        out.printAllCars(listBmw);
+                                        outCars.printAllCars(listBmw);
                                         break;
                                     case 3:
                                         System.out.println("*** Автосалон Volkswagen ***");
-                                        out.printAllCars(listVolkswagen);
+                                        outCars.printAllCars(listVolkswagen);
                                         break;
                                     case 4:
                                         //Назад в главное меню
@@ -75,20 +80,22 @@ public class Main {
                                 System.out.println("Выберите автосалон: \n"
                                         + "1. Audi\n"
                                         + "2. BMW\n"
-                                        + "3. Volkswagen\n");
+                                        + "3. Volkswagen\n"
+                                        + "\n"
+                                        + "4. Назад");
                                 numberSalon = in.nextInt();
                                 switch (numberSalon) {
                                     case 1:
                                         System.out.println("*** Автосалон Audi ***");
-                                        cars.addCars(pathToAudiFile, out.getCarsList(pathToAudiFile).size());
+                                        cars.addCars(pathToAudiFile, outCars.getCarsList(pathToAudiFile).size());
                                         break;
                                     case 2:
                                         System.out.println("*** Автосалон BMW ***");
-                                        cars.addCars(pathToBMWFile, out.getCarsList(pathToBMWFile).size());
+                                        cars.addCars(pathToBMWFile, outCars.getCarsList(pathToBMWFile).size());
                                         break;
                                     case 3:
                                         System.out.println("*** Автосалон Volkswagen ***");
-                                        cars.addCars(pathToVolkswagenFile, out.getCarsList(pathToVolkswagenFile).size());
+                                        cars.addCars(pathToVolkswagenFile, outCars.getCarsList(pathToVolkswagenFile).size());
                                         break;
                                     case 4:
                                         //Назад в главное меню
@@ -101,26 +108,28 @@ public class Main {
                                 System.out.println("Выберите автосалон: \n"
                                         + "1. Audi\n"
                                         + "2. BMW\n"
-                                        + "3. Volkswagen\n");
+                                        + "3. Volkswagen\n"
+                                        + "\n"
+                                        + "4. Назад");
                                 int numberSalonDel = in.nextInt();
                                 switch (numberSalonDel) {
                                     case 1:
                                         System.out.println("*** Автосалон Audi ***");
-                                        listAudi = out.getCarsList(pathToAudiFile);
-                                        out.printAllCars(listAudi);
-                                        out.removeCar(listAudi, pathToAudiFile);
+                                        listAudi = outCars.getCarsList(pathToAudiFile);
+                                        outCars.printAllCars(listAudi);
+                                        outCars.removeCar(listAudi, pathToAudiFile);
                                         break;
                                     case 2:
                                         System.out.println("*** Автосалон BMW ***");
-                                        listBmw = out.getCarsList(pathToBMWFile);
-                                        out.printAllCars(listBmw);
-                                        out.removeCar(listBmw, pathToBMWFile);
+                                        listBmw = outCars.getCarsList(pathToBMWFile);
+                                        outCars.printAllCars(listBmw);
+                                        outCars.removeCar(listBmw, pathToBMWFile);
                                         break;
                                     case 3:
                                         System.out.println("*** Автосалон Volkswagen ***");
-                                        listVolkswagen = out.getCarsList(pathToVolkswagenFile);
-                                        out.printAllCars(listVolkswagen);
-                                        out.removeCar(listVolkswagen, pathToVolkswagenFile);
+                                        listVolkswagen = outCars.getCarsList(pathToVolkswagenFile);
+                                        outCars.printAllCars(listVolkswagen);
+                                        outCars.removeCar(listVolkswagen, pathToVolkswagenFile);
                                         break;
                                     case 4:
                                         //Назад в главное меню
@@ -129,49 +138,71 @@ public class Main {
                                         System.out.println("Введите верное значение.");
                                 }
                                 break;
-                            case 4:
+                            case 4://Бронирование
                                 //logic
                                 break;
-                            case 5:
-                                //logic
+                            case 5://Список зарегестрированнных пользователей
+                                //Список пользователей:
+                                //id: value
+                                //Логин value
+                                //isAdmin = true/false
+                                System.out.println("Выберите действие: \n"
+                                        + "1. Удалить пользователя\n"
+                                        + "2. Дать права администратора\n"
+                                        + "3. Назад в главное меню\n");
+                                int numberUser = in.nextInt();
+                                switch (numberUser) {
+                                    case 1:
+                                        //
+                                        break;
+                                    case 2:
+                                        //
+                                        break;
+                                    case 3:
+                                        //назад в главное меню
+                                        break;
+                                    default:
+                                        System.out.println("Введите верное значение.");
+                                }
                                 break;
                             default:
                                 System.out.println("Введите верное значение.");
                         }
 
-
                     } else if (userType.equals("user")) {
                         System.out.println("Вы вошли как пользователь. Выберите автосалон: \n"
                                 + "1. Audi\n"
                                 + "2. BMW\n"
-                                + "3. Volkswagen\n");
+                                + "3. Volkswagen\n"
+                                + "\n"
+                                + "4. Назад");
                         int numberSalon = in.nextInt();
                         switch (numberSalon) {
                             case 1:
                                 System.out.println("*** Автосалон Audi ***");
-                                out.printAllCars(listAudi);
+                                outCars.printAllCars(listAudi);
                                 System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Выход к автосалонам");
-                                int numberSort = in.nextInt();
-                                switch (numberSort) {
+                                int numberSortAudi = in.nextInt();
+                                switch (numberSortAudi) {
                                     case 1:
                                         System.out.println("Сортировка по модели");
                                         listAudi.sort(sortModel);
-                                        out.printAllCars(listAudi);
+                                        outCars.printAllCars(listAudi);
                                         break;
                                     case 2:
                                         System.out.println("Сортировка по цвету");
                                         listAudi.sort(sortColor);
-                                        out.printAllCars(listAudi);
+                                        outCars.printAllCars(listAudi);
                                         break;
                                     case 3:
                                         System.out.println("Сортировка по году выпуска");
                                         listAudi.sort(sortYear);
-                                        out.printAllCars(listAudi);
+                                        outCars.printAllCars(listAudi);
                                         break;
                                     case 4:
                                         System.out.println("Сортировка по цене");
                                         listAudi.sort(sortPrice);
-                                        out.printAllCars(listAudi);
+                                        outCars.printAllCars(listAudi);
                                         break;
                                     case 5:
                                         break;
@@ -182,9 +213,69 @@ public class Main {
                                 break;
                             case 2:
                                 System.out.println("*** Автосалон BMW ***");
+                                outCars.printAllCars(listBmw);
+                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Выход к автосалонам");
+                                int numberSortBmw = in.nextInt();
+                                switch (numberSortBmw) {
+                                    case 1:
+                                        System.out.println("Сортировка по модели");
+                                        listBmw.sort(sortModel);
+                                        outCars.printAllCars(listBmw);
+                                        break;
+                                    case 2:
+                                        System.out.println("Сортировка по цвету");
+                                        listBmw.sort(sortColor);
+                                        outCars.printAllCars(listBmw);
+                                        break;
+                                    case 3:
+                                        System.out.println("Сортировка по году выпуска");
+                                        listBmw.sort(sortYear);
+                                        outCars.printAllCars(listBmw);
+                                        break;
+                                    case 4:
+                                        System.out.println("Сортировка по цене");
+                                        listBmw.sort(sortPrice);
+                                        outCars.printAllCars(listBmw);
+                                        break;
+                                    case 5:
+                                        break;
+                                    //выход к салонам
+                                    default:
+                                        System.out.println("Введите правильное значение");
+                                }
                                 break;
                             case 3:
                                 System.out.println("*** Автосалон Volkswagen ***");
+                                outCars.printAllCars(listVolkswagen);
+                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Выход к автосалонам");
+                                int numberSortVolkswagen = in.nextInt();
+                                switch (numberSortVolkswagen) {
+                                    case 1:
+                                        System.out.println("Сортировка по модели");
+                                        listVolkswagen.sort(sortModel);
+                                        outCars.printAllCars(listVolkswagen);
+                                        break;
+                                    case 2:
+                                        System.out.println("Сортировка по цвету");
+                                        listVolkswagen.sort(sortColor);
+                                        outCars.printAllCars(listVolkswagen);
+                                        break;
+                                    case 3:
+                                        System.out.println("Сортировка по году выпуска");
+                                        listVolkswagen.sort(sortYear);
+                                        outCars.printAllCars(listVolkswagen);
+                                        break;
+                                    case 4:
+                                        System.out.println("Сортировка по цене");
+                                        listVolkswagen.sort(sortPrice);
+                                        outCars.printAllCars(listVolkswagen);
+                                        break;
+                                    case 5:
+                                        break;
+                                    //выход к салонам
+                                    default:
+                                        System.out.println("Введите правильное значение");
+                                }
                                 break;
                             case 4:
                                 //Назад в главное меню
@@ -198,9 +289,9 @@ public class Main {
                     }
                     break;
                 case 2:
-                    System.out.println("Регистрация.");
+                    System.out.println("Регистрация...");
                     Users userRegistr = new Users();
-                    userRegistr.registration();
+                    userRegistr.registration(outUsers.getUserList(pathToUserFile).size());
                     break;
                 case 3:
                     System.out.println("Выход из приложения.");
@@ -210,9 +301,5 @@ public class Main {
                     System.out.println("Введено не верное значение.");
             }
         }
-    }
-
-    public void adminMenu(){
-
     }
 }

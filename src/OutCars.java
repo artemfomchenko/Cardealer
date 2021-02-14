@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Out {
+public class OutCars {
 
     public ArrayList<Cars> getCarsList(String pathToFile) throws IOException {
         ArrayList<Cars> carsList = new ArrayList<Cars>();
@@ -49,23 +49,4 @@ public class Out {
         }
         write.close();
     }
-
-//    public void removeCar (ArrayList<Cars> carsList, String pathToFile) {
-//        Iterator<Cars> carsIterator = carsList.iterator();
-//        Scanner numberDelete = new Scanner(System.in);
-//        System.out.println("Введите индекс удаляемого автомобиля:");
-//        int indexSize = numberDelete.nextInt();
-//        int indexDelete = indexSize - 1;
-//        while (carsIterator.hasNext()) {
-//            System.out.println("------");
-//            System.out.println(carsIterator.next());
-//            System.out.println("++++");
-//            Object o = carsIterator.next();
-//            if (o.equals(indexDelete)) {
-//                carsIterator.remove();
-//                System.out.println("Объект удалён");//test
-//            }
-//            System.out.println(carsIterator.next());
-//        }
-//    }
 }
