@@ -21,6 +21,7 @@ public class Main {
         String pathToUserFile = "E://IdeaProjects/CarDealer/Users/listOfUsers.txt";
         OutUsers outUsers = new OutUsers();
         ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
+        SortLogin sortLogin = new SortLogin();
 
         int option = 0;
 
@@ -145,19 +146,28 @@ public class Main {
                                 listUsers = outUsers.getUserList(pathToUserFile);
                                 outUsers.printAllUser(listUsers);
                                 System.out.println("Выберите действие: \n"
-                                        + "1. Удалить пользователя\n"
-                                        + "2. Дать права администратора\n"
-                                        + "3. Назад в главное меню\n");
+                                        + "1. Сортировка по логину\n"
+                                        + "2. Удалить пользователя\n"
+                                        + "3. Дать права администратора\n"
+                                        + "4. Назад в главное меню\n");
                                 int numberUser = in.nextInt();
                                 switch (numberUser) {
                                     case 1:
-                                        outUsers.removeUser(listUsers, pathToUserFile);
+                                        listUsers.sort(sortLogin);
+                                        System.out.println("=== Отсортированный список ===");
+                                        outUsers.printAllUser(listUsers);
                                         break;
                                     case 2:
-                                        //
+                                        outUsers.removeUser(listUsers, pathToUserFile);
+                                        System.out.println("Список обновлён!");
+                                        listUsers = outUsers.getUserList(pathToUserFile);
+                                        outUsers.printAllUser(listUsers);
                                         break;
                                     case 3:
-                                        //назад в главное меню
+                                        //makeadmin
+                                        break;
+                                    case 4:
+                                        //назад
                                         break;
                                     default:
                                         System.out.println("Введите верное значение.");
