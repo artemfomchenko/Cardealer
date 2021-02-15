@@ -1,7 +1,5 @@
 import java.io.*;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Users {
     private int index;
@@ -100,7 +98,6 @@ public class Users {
                             correctLogin = true;
                             userType = "user";
                         }
-
                     }
                 }
             }

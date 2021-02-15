@@ -28,12 +28,15 @@ public class Main {
         System.out.println("\t\t***** Добро пожаловать! *****");
 
         while (option != 3) {
-            System.out.println("1. Вход\n" + "2. Регистрация\n" + "3. Выход\n");
+            System.out.println("""
+                    1. Вход
+                    2. Регистрация
+                    3. Выход
+                    """);
             int numberMenu;
             Scanner in = new Scanner(System.in);
             numberMenu = in.nextInt();
             switch (numberMenu) {
-
                 case 1:
                     System.out.println("Вход в систему... \n");
                     Users user = new Users();
@@ -41,21 +44,27 @@ public class Main {
 
                     if (userType.equals("admin")) {
                         Cars cars = new Cars();
-                        System.out.println("Вы вошли как администратор. \nВыберите раздел: \n"
-                                + "1. Список автомобилей\n"
-                                + "2. Добавить автомобиль\n"
-                                + "3. Удалить автомобиль\n"
-                                + "4. Список забронированных автомобилей\n"//бронирование
-                                + "5. Список зарегестрированных пользователей\n");//удалить пользователя/дать права админа
+                        System.out.println("""
+                                Вы вошли как администратор.\s
+                                Выберите раздел:\s
+                                1. Список автомобилей
+                                2. Добавить автомобиль
+                                3. Удалить автомобиль
+                                4. Список забронированных автомобилей
+                                5. Список зарегестрированных пользователей
+                                
+                                6. Выход
+                                """);
                         int numberAdm = in.nextInt();
                         switch (numberAdm) {
                             case 1:
-                                System.out.println("Выберите автосалон: \n"
-                                        + "1. Audi\n"
-                                        + "2. BMW\n"
-                                        + "3. Volkswagen\n"
-                                        + "\n"
-                                        + "4. Назад");
+                                System.out.println("""
+                                        Выберите автосалон:\s
+                                        1. Audi
+                                        2. BMW
+                                        3. Volkswagen
+
+                                        4. Назад""");
                                 int numberSalon = in.nextInt();
                                 switch (numberSalon) {
                                     case 1:
@@ -71,19 +80,19 @@ public class Main {
                                         outCars.printAllCars(listVolkswagen);
                                         break;
                                     case 4:
-                                        //Назад в главное меню
                                         break;
                                     default:
                                         System.out.println("Введите верное значение.");
                                 }
                                 break;
                             case 2: //добавление авто
-                                System.out.println("Выберите автосалон: \n"
-                                        + "1. Audi\n"
-                                        + "2. BMW\n"
-                                        + "3. Volkswagen\n"
-                                        + "\n"
-                                        + "4. Назад");
+                                System.out.println("""
+                                        Выберите автосалон:\s
+                                        1. Audi
+                                        2. BMW
+                                        3. Volkswagen
+
+                                        4. Назад""");
                                 numberSalon = in.nextInt();
                                 switch (numberSalon) {
                                     case 1:
@@ -106,12 +115,13 @@ public class Main {
                                 }
                                 break;
                             case 3: //удаление авто
-                                System.out.println("Выберите автосалон: \n"
-                                        + "1. Audi\n"
-                                        + "2. BMW\n"
-                                        + "3. Volkswagen\n"
-                                        + "\n"
-                                        + "4. Назад");
+                                System.out.println("""
+                                        Выберите автосалон:\s
+                                        1. Audi
+                                        2. BMW
+                                        3. Volkswagen
+
+                                        4. Назад""");
                                 int numberSalonDel = in.nextInt();
                                 switch (numberSalonDel) {
                                     case 1:
@@ -133,7 +143,7 @@ public class Main {
                                         outCars.removeCar(listVolkswagen, pathToVolkswagenFile);
                                         break;
                                     case 4:
-                                        //Назад в главное меню
+                                        //Назад
                                         break;
                                     default:
                                         System.out.println("Введите верное значение.");
@@ -145,11 +155,15 @@ public class Main {
                             case 5://Список зарегестрированнных пользователей
                                 listUsers = outUsers.getUserList(pathToUserFile);
                                 outUsers.printAllUser(listUsers);
-                                System.out.println("Выберите действие: \n"
-                                        + "1. Сортировка по логину\n"
-                                        + "2. Удалить пользователя\n"
-                                        + "3. Дать права администратора\n"
-                                        + "4. Назад в главное меню\n");
+                                System.out.println("""
+                                        Выберите действие:\s
+                                        1. Сортировка по логину
+                                        2. Удалить пользователя
+                                        3. Дать права администратора
+                                        4. Удалить права администратора
+                                        
+                                        5. Назад
+                                        """);
                                 int numberUser = in.nextInt();
                                 switch (numberUser) {
                                     case 1:
@@ -159,37 +173,49 @@ public class Main {
                                         break;
                                     case 2:
                                         outUsers.removeUser(listUsers, pathToUserFile);
-                                        System.out.println("Список обновлён!");
+                                        System.out.println("=== Список обновлён ===");
                                         listUsers = outUsers.getUserList(pathToUserFile);
                                         outUsers.printAllUser(listUsers);
                                         break;
-                                    case 3:
-                                        //makeadmin
+                                    case 3://makeAdmin
+                                        outUsers.makeAdmin(listUsers, pathToUserFile);
+                                        System.out.println("=== Список обновлён ===");
+                                        listUsers = outUsers.getUserList(pathToUserFile);
+                                        outUsers.printAllUser(listUsers);
                                         break;
-                                    case 4:
-                                        //назад
+                                    case 4://removeAdmin
+                                        //outUsers.removeAdmin(listUsers, pathToUserFile);
+                                        System.out.println("=== Список обновлён ===");
+                                        listUsers = outUsers.getUserList(pathToUserFile);
+                                        outUsers.printAllUser(listUsers);
+                                        break;
+                                    case 5:
+                                        //
                                         break;
                                     default:
                                         System.out.println("Введите верное значение.");
                                 }
+                                break;
+                            case 6:
                                 break;
                             default:
                                 System.out.println("Введите верное значение.");
                         }
 
                     } else if (userType.equals("user")) {
-                        System.out.println("Вы вошли как пользователь. Выберите автосалон: \n"
-                                + "1. Audi\n"
-                                + "2. BMW\n"
-                                + "3. Volkswagen\n"
-                                + "\n"
-                                + "4. Назад");
+                        System.out.println("""
+                                Вы вошли как пользователь. Выберите автосалон:\s
+                                1. Audi
+                                2. BMW
+                                3. Volkswagen
+
+                                4. Назад""");
                         int numberSalon = in.nextInt();
                         switch (numberSalon) {
                             case 1:
                                 System.out.println("*** Автосалон Audi ***");
                                 outCars.printAllCars(listAudi);
-                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Выход к автосалонам");
+                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Назад");
                                 int numberSortAudi = in.nextInt();
                                 switch (numberSortAudi) {
                                     case 1:
@@ -222,7 +248,7 @@ public class Main {
                             case 2:
                                 System.out.println("*** Автосалон BMW ***");
                                 outCars.printAllCars(listBmw);
-                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Выход к автосалонам");
+                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Назад");
                                 int numberSortBmw = in.nextInt();
                                 switch (numberSortBmw) {
                                     case 1:
@@ -255,7 +281,7 @@ public class Main {
                             case 3:
                                 System.out.println("*** Автосалон Volkswagen ***");
                                 outCars.printAllCars(listVolkswagen);
-                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Выход к автосалонам");
+                                System.out.println("Упорядочить по:\n1. Модели.\n2. Цвету.\n3. Году выпуска.\n4. Цене.\n5. Назад");
                                 int numberSortVolkswagen = in.nextInt();
                                 switch (numberSortVolkswagen) {
                                     case 1:
