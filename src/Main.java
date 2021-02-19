@@ -184,7 +184,7 @@ public class Main {
                                         outUsers.printAllUser(listUsers);
                                         break;
                                     case 4://removeAdmin
-                                        //outUsers.removeAdmin(listUsers, pathToUserFile);
+                                        outUsers.removeAdmin(listUsers, pathToUserFile);
                                         System.out.println("=== Список обновлён ===");
                                         listUsers = outUsers.getUserList(pathToUserFile);
                                         outUsers.printAllUser(listUsers);

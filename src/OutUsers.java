@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class OutUsers {
@@ -32,7 +33,6 @@ public class OutUsers {
     }
 
     public void removeUser (ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
-        //ArrayList<Users> listUsersAfterDelete = new ArrayList<>();
         Writer write = new FileWriter(pathToUserFile);
         Scanner numberDelete = new Scanner(System.in);
         System.out.println("Введите индекс удаляемого пользователя(аккаунта):");
@@ -40,7 +40,6 @@ public class OutUsers {
         int firstUserIndex = 1;
         for (Users value : listUsers) {
             if (value.getIndex()!=indexDelete) {
-                //listUsersAfterDelete.add(value);
                 write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
                 firstUserIndex++;
             }
@@ -50,25 +49,54 @@ public class OutUsers {
     }
 
     public void makeAdmin (ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
-//        ArrayList<Users> updateList = new ArrayList<>();
         Writer write = new FileWriter(pathToUserFile);
         Scanner numAdm = new Scanner(System.in);
         System.out.println("Введите индекс аккаунта:");
-        int indexAdm = numAdm.nextInt();
-        int firstCarIndex = 1;
+        int indexAddAdmin = numAdm.nextInt();
+        int firstUserIndex = 1;
         for (Users value : listUsers) {
-            if (value.getIndex()==indexAdm) {
+            if (value.getIndex()==indexAddAdmin) {
                 value.setAdmin(true);
-//                updateList.add(value);
-                write.write("{\n" + value.toStringUserAdmin(firstCarIndex) + "},\n");
-                firstCarIndex++;
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
+                System.out.println("Вы дали права администратора.");
+            }
+            else if (value.isAdmin()) {
+                System.out.println("Пользователь уже имеет права администратора.");
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
+            }
+            else {
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
             }
         }
         write.close();
-        System.out.println("Вы дали права администратора.");
     }
 
     public void removeAdmin (ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
-
+        Writer write = new FileWriter(pathToUserFile);
+        Scanner numAdm = new Scanner(System.in);
+        System.out.println("Введите индекс аккаунта:");
+        int indexRemoveAdmin = numAdm.nextInt();
+        int firstUserIndex = 1;
+        for (Users value : listUsers) {
+            if (value.getIndex()==indexRemoveAdmin) {
+                value.setAdmin(false);
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
+            }
+            else if (!value.isAdmin()) {
+                System.out.println("Пользователь не имеет прав администратора.");
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
+            }
+            else {
+                write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
+                firstUserIndex++;
+            }
+        }
+        write.close();
+        System.out.println("Вы удалили права администратора.");
     }
 }
