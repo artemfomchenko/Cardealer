@@ -18,6 +18,7 @@ public class OutCars {
                     cars.setColor(read.readLine().replaceAll("Цвет: ", "").trim());
                     cars.setYear(Integer.parseInt(read.readLine().replaceAll("Год выпуска: ", "").trim()));
                     cars.setPrice(Integer.parseInt(read.readLine().replaceAll("Стоимость: ", "").trim()));
+                    cars.setOrder(Boolean.parseBoolean(read.readLine().replaceAll("Бронирование: ", "").trim()));
                     carsList.add(cars);
                 }
             }
@@ -30,6 +31,14 @@ public class OutCars {
     public void printAllCars(ArrayList<Cars> carsList) {
         for (Cars value : carsList) {
             System.out.println(value);
+        }
+    }
+
+    public void printReservationCars(ArrayList<Cars> carsList) {
+        for (Cars value : carsList) {
+            if (value.isOrder()) {
+                System.out.println(value);
+            }
         }
     }
 
@@ -47,5 +56,57 @@ public class OutCars {
         }
         write.close();
         System.out.println("Авто удалено из базы.");
+    }
+
+    public void reservation (ArrayList<Cars> carsList, String pathToFile) throws IOException {
+        Writer write = new FileWriter(pathToFile);
+        Scanner numberReservation = new Scanner(System.in);
+        System.out.println("Введите индекс автомобиля:");
+        int indexReservation = numberReservation.nextInt();
+        int firstCarIndex = 1;
+        for (Cars value : carsList) {
+            if (value.getIndex()==indexReservation) {
+                value.setOrder(true);
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+                System.out.println("Выбранный авто зарезервирован!");
+            }
+            else if (value.isOrder()) {
+                System.err.println("Выбранный авто уже зарезервирован!");
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+            }
+            else {
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+            }
+        }
+        write.close();
+    }
+
+    public void removeReservation (ArrayList<Cars> carsList, String pathToFile) throws IOException {
+        Writer write = new FileWriter(pathToFile);
+        Scanner numberDeleteReservation = new Scanner(System.in);
+        System.out.println("Введите индекс автомобиля:");
+        int indexReservation = numberDeleteReservation.nextInt();
+        int firstCarIndex = 1;
+        for (Cars value : carsList) {
+            if (value.getIndex()==indexReservation) {
+                value.setOrder(false);
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+                System.out.println("Резерв снят.");
+            }
+            else if (value.isOrder()) {
+                System.err.println("Выбранный авто не находится в резерве!");
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+            }
+            else {
+                write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
+                firstCarIndex++;
+            }
+        }
+        write.close();
     }
 }

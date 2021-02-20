@@ -12,7 +12,7 @@ public class Cars {
     private String color;
     private int year;
     private int price;
-    private boolean order;
+    private boolean order = false;
 
     @Override
     public String toString() {
@@ -21,16 +21,18 @@ public class Cars {
                 + "Модель: " + model + "\n"
                 + "Цвет: " + color + "\n"
                 + "Год выпуска: " + year + "\n"
-                + "Стоимость: " + price + "\n";
+                + "Стоимость: " + price + "\n"
+                + "Бронирование: " + order + "\n";
     }
 
-    public String toStringAdmin(int listLenght) {
-        return  "Индекс: " + listLenght + "\n"
+    public String toStringAdmin(int listLength) {//Запись
+        return  "Индекс: " + listLength + "\n"
                 + "Марка: " + brand + "\n"
                 + "Модель: " + model + "\n"
                 + "Цвет: " + color + "\n"
                 + "Год выпуска: " + year + "\n"
-                + "Стоимость: " + price + "\n";
+                + "Стоимость: " + price + "\n"
+                + "Бронирование: " + order + "\n";
     }
 
 
@@ -82,7 +84,7 @@ public class Cars {
         this.index = index;
     }
 
-    public boolean getOrder() {
+    public boolean isOrder() {
         return order;
     }
 

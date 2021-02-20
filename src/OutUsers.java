@@ -55,14 +55,15 @@ public class OutUsers {
         int indexAddAdmin = numAdm.nextInt();
         int firstUserIndex = 1;
         for (Users value : listUsers) {
-            if (value.getIndex()==indexAddAdmin) {
+            if (value.getIndex()==indexAddAdmin && !value.isAdmin()) {
+                System.out.println(value.isAdmin());
                 value.setAdmin(true);
                 write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
                 firstUserIndex++;
                 System.out.println("Вы дали права администратора.");
             }
-            else if (value.isAdmin()) {
-                System.out.println("Пользователь уже имеет права администратора.");
+            else if (value.getIndex()==indexAddAdmin && value.isAdmin()) {
+                System.err.println("Пользователь уже имеет права администратора.");
                 write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
                 firstUserIndex++;
             }
@@ -81,13 +82,14 @@ public class OutUsers {
         int indexRemoveAdmin = numAdm.nextInt();
         int firstUserIndex = 1;
         for (Users value : listUsers) {
-            if (value.getIndex()==indexRemoveAdmin) {
+            if (value.getIndex()==indexRemoveAdmin && value.isAdmin()) {
                 value.setAdmin(false);
                 write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
                 firstUserIndex++;
+                System.out.println("Вы удалили права администратора.");
             }
-            else if (!value.isAdmin()) {
-                System.out.println("Пользователь не имеет прав администратора.");
+            else if (value.getIndex()==indexRemoveAdmin && !value.isAdmin()) {
+                System.err.println("Пользователь не имеет прав администратора.");
                 write.write("{\n" + value.toStringUserAdmin(firstUserIndex) + "},\n");
                 firstUserIndex++;
             }
@@ -97,6 +99,5 @@ public class OutUsers {
             }
         }
         write.close();
-        System.out.println("Вы удалили права администратора.");
     }
 }
