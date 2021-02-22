@@ -318,7 +318,7 @@ public class MenuFunctions {
         while (option != 5) {
             Scanner in = new Scanner(System.in);
             ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
-            outUsers.printAllUser(listUsers);
+            outUsers.printAllUser(listUsers);//2
             System.out.println("""
                     Выберите действие:\s
                     1. Сортировка по логину
@@ -334,7 +334,7 @@ public class MenuFunctions {
                     SortLogin sortLogin = new SortLogin();
                     listUsers.sort(sortLogin);
                     System.out.println("=== Отсортированный список ===");
-                    outUsers.printAllUser(listUsers);
+                    outUsers.printAllUser(listUsers);//1
                     break;
                 case 2:
                     outUsers.removeUser(listUsers, pathToUserFile);

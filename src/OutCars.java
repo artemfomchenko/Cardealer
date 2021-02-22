@@ -12,13 +12,20 @@ public class OutCars {
             while ((line = read.readLine()) != null) {
                 if (line.equals("{")) {
                     Cars cars = new Cars();
-                    cars.setIndex(Integer.parseInt(read.readLine().replaceAll("Индекс: ", "").trim()));
-                    cars.setBrand(read.readLine().replaceAll("Марка: ", "").trim());
-                    cars.setModel(read.readLine().replaceAll("Модель: ", "").trim());
-                    cars.setColor(read.readLine().replaceAll("Цвет: ", "").trim());
-                    cars.setYear(Integer.parseInt(read.readLine().replaceAll("Год выпуска: ", "").trim()));
-                    cars.setPrice(Integer.parseInt(read.readLine().replaceAll("Стоимость: ", "").trim()));
-                    cars.setOrder(Boolean.parseBoolean(read.readLine().replaceAll("Бронирование: ", "").trim()));
+                    cars.setIndex(Integer.parseInt(read.readLine().
+                            replaceAll("Индекс: ", "").trim()));
+                    cars.setBrand(read.readLine().
+                            replaceAll("Марка: ", "").trim());
+                    cars.setModel(read.readLine().
+                            replaceAll("Модель: ", "").trim());
+                    cars.setColor(read.readLine().
+                            replaceAll("Цвет: ", "").trim());
+                    cars.setYear(Integer.parseInt(read.readLine().
+                            replaceAll("Год выпуска: ", "").trim()));
+                    cars.setPrice(Integer.parseInt(read.readLine().
+                            replaceAll("Стоимость: ", "").trim()));
+                    cars.setOrder(Boolean.parseBoolean(read.readLine().
+                            replaceAll("Бронирование: ", "").trim()));
                     carsList.add(cars);
                 }
             }
@@ -45,8 +52,19 @@ public class OutCars {
     public void removeCar(ArrayList<Cars> carsList, String pathToFile) throws IOException {
         Writer write = new FileWriter(pathToFile);
         Scanner numberDelete = new Scanner(System.in);
-        System.out.println("Введите индекс удаляемого автомобиля:");
-        int indexDelete = numberDelete.nextInt();
+        int indexDelete = Checks.checkCarsIndexRange(numberDelete, carsList);
+//        do {
+//            System.out.println("Введите индекс удаляемого автомобиля:");
+//            while (!numberDelete.hasNextInt()) {
+//                System.out.println("Неверный формат ввода!");
+//                numberDelete.next();
+//            }
+//            indexDelete = numberDelete.nextInt();
+//            if (indexDelete <= 0 || indexDelete > carsList.size()){
+//                System.out.println("Такого индекса не существует!");
+//            }
+//        } while (indexDelete <= 0 || indexDelete > carsList.size());
+
         int firstCarIndex = 1;
         for (Cars value : carsList) {
             if (value.getIndex() != indexDelete) {

@@ -12,11 +12,16 @@ public class OutUsers {
             while ((line = read.readLine()) != null) {
                 if (line.equals("{")) {
                     Users users = new Users();
-                    users.setIndex(Integer.parseInt(read.readLine().replaceAll("Индекс: ", "").trim()));
-                    users.setUserName(read.readLine().replaceAll("Логин: ", "").trim());
-                    users.setPassword(read.readLine().replaceAll("Пароль: ", "").trim());
-                    users.setPhoneNumber(read.readLine().replaceAll("Номер телефона: ", "").trim());
-                    users.setAdmin(Boolean.parseBoolean(read.readLine().replaceAll("Администратор: ", "").trim()));
+                    users.setIndex(Integer.parseInt(read.readLine().
+                            replaceAll("Индекс: ", "").trim()));
+                    users.setUserName(read.readLine().
+                            replaceAll("Логин: ", "").trim());
+                    users.setPassword(read.readLine().
+                            replaceAll("Пароль: ", "").trim());
+                    users.setPhoneNumber(read.readLine().
+                            replaceAll("Номер телефона: ", "").trim());
+                    users.setAdmin(Boolean.parseBoolean(read.readLine().
+                            replaceAll("Администратор: ", "").trim()));
                     listUsers.add(users);
                 }
             }
@@ -35,8 +40,7 @@ public class OutUsers {
     public void removeUser(ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
         Writer write = new FileWriter(pathToUserFile);
         Scanner numberDelete = new Scanner(System.in);
-        System.out.println("Введите индекс удаляемого пользователя(аккаунта):");
-        int indexDelete = numberDelete.nextInt();
+        int indexDelete = Checks.checkUsersIndexRange(numberDelete, listUsers);
         int firstUserIndex = 1;
         for (Users value : listUsers) {
             if (value.getIndex() != indexDelete) {
