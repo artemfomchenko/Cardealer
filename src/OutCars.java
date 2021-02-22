@@ -3,8 +3,8 @@ import java.util.*;
 
 public class OutCars {
 
-    public ArrayList<Cars> getCarsList(String pathToFile) throws IOException {
-        ArrayList<Cars> carsList = new ArrayList<Cars>();
+    public ArrayList<Cars> getCarsList(String pathToFile) {
+        ArrayList<Cars> carsList = new ArrayList<>();
         String pathToCarsList = pathToFile;
         try {
             BufferedReader read = new BufferedReader(new FileReader(pathToCarsList));
@@ -42,14 +42,14 @@ public class OutCars {
         }
     }
 
-    public void removeCar (ArrayList<Cars> carsList, String pathToFile) throws IOException {
+    public void removeCar(ArrayList<Cars> carsList, String pathToFile) throws IOException {
         Writer write = new FileWriter(pathToFile);
         Scanner numberDelete = new Scanner(System.in);
         System.out.println("Введите индекс удаляемого автомобиля:");
         int indexDelete = numberDelete.nextInt();
         int firstCarIndex = 1;
         for (Cars value : carsList) {
-            if (value.getIndex()!=indexDelete) {
+            if (value.getIndex() != indexDelete) {
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
             }
@@ -58,25 +58,23 @@ public class OutCars {
         System.out.println("Авто удалено из базы.");
     }
 
-    public void reservation (ArrayList<Cars> carsList, String pathToFile) throws IOException {
+    public void reservation(ArrayList<Cars> carsList, String pathToFile) throws IOException {
         Writer write = new FileWriter(pathToFile);
         Scanner numberReservation = new Scanner(System.in);
         System.out.println("Введите индекс автомобиля:");
         int indexReservation = numberReservation.nextInt();
         int firstCarIndex = 1;
         for (Cars value : carsList) {
-            if (value.getIndex()==indexReservation) {
+            if (value.getIndex() == indexReservation && !value.isOrder()) {
                 value.setOrder(true);
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
                 System.out.println("Выбранный авто зарезервирован!");
-            }
-            else if (value.isOrder()) {
+            } else if (value.getIndex() == indexReservation && value.isOrder()) {
                 System.err.println("Выбранный авто уже зарезервирован!");
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
-            }
-            else {
+            } else {
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
             }
@@ -84,25 +82,23 @@ public class OutCars {
         write.close();
     }
 
-    public void removeReservation (ArrayList<Cars> carsList, String pathToFile) throws IOException {
+    public void removeReservation(ArrayList<Cars> carsList, String pathToFile) throws IOException {
         Writer write = new FileWriter(pathToFile);
         Scanner numberDeleteReservation = new Scanner(System.in);
         System.out.println("Введите индекс автомобиля:");
         int indexReservation = numberDeleteReservation.nextInt();
         int firstCarIndex = 1;
         for (Cars value : carsList) {
-            if (value.getIndex()==indexReservation) {
+            if (value.getIndex() == indexReservation && value.isOrder()) {
                 value.setOrder(false);
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
                 System.out.println("Резерв снят.");
-            }
-            else if (value.isOrder()) {
+            } else if (value.getIndex() == indexReservation && !value.isOrder()) {
                 System.err.println("Выбранный авто не находится в резерве!");
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
-            }
-            else {
+            } else {
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
             }

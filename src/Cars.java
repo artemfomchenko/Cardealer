@@ -26,7 +26,7 @@ public class Cars {
     }
 
     public String toStringAdmin(int listLength) {//Запись
-        return  "Индекс: " + listLength + "\n"
+        return "Индекс: " + listLength + "\n"
                 + "Марка: " + brand + "\n"
                 + "Модель: " + model + "\n"
                 + "Цвет: " + color + "\n"
@@ -117,7 +117,7 @@ public class Cars {
             setPrice(price);
 
             listLength++;
-            write.write("{\n"+ toStringAdmin(listLength) + "},\n");
+            write.write("{\n" + toStringAdmin(listLength) + "},\n");
             input.nextLine();//
             System.out.println("Авто добавлено! Добавить еще? (Да/Нет):");
 

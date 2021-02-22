@@ -5,20 +5,22 @@ public class Users {
     private int index;
     private String userName;
     private String password;
+    private String phoneNumber;
     private boolean isAdmin = false;
 
     @Override
     public String toString() {
-        return  "id: " + index + "\n"
+        return "id: " + index + "\n"
                 + "Логин: " + userName + "\n"
-                //+ "Пароль: " + password + "\n"
+                + "Номер телефона: " + phoneNumber + "\n"
                 + "Администратор: " + isAdmin + "\n";
     }
 
     public String toStringUserAdmin(int userLength) {
-        return  "Индекс: " + userLength + "\n"
+        return "Индекс: " + userLength + "\n"
                 + "Логин: " + userName + "\n"
                 + "Пароль: " + password + "\n"
+                + "Номер телефона: " + phoneNumber + "\n"
                 + "Администратор: " + isAdmin + "\n";
     }
 
@@ -36,6 +38,14 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public boolean isAdmin() {
@@ -60,14 +70,16 @@ public class Users {
         setUserName(input.nextLine());
         System.out.println("Введите пароль:");
         setPassword(input.nextLine());
+        System.out.println("Введите свой номер телефона с кодом:");
+        setPhoneNumber(input.nextLine());
         userLength++;
 
         String pathToUserList = "E://IdeaProjects/CarDealer/Users/listOfUsers.txt";
         Writer write = new FileWriter(pathToUserList, true);
-        write.write("{\n"+ toStringUserAdmin(userLength) + "},\n");
+        write.write("{\n" + toStringUserAdmin(userLength) + "},\n");
         write.close();
         System.out.println("Вы успешно зарегистрированы!\n" +
-                            "Выберите действие:");
+                "Выберите действие:");
     }
 
     public String login() {
@@ -89,8 +101,9 @@ public class Users {
                     int dbIndex = Integer.parseInt(read.readLine().replaceAll("Индекс: ", "").trim());
                     String dbUser = read.readLine().replaceAll("Логин: ", "").trim();
                     String dbPassword = read.readLine().replaceAll("Пароль: ", "").trim();
+                    String dbPhoneNumber = read.readLine().replaceAll("Номер телефона: ", "").trim();
                     String DBIsAdmin = read.readLine().replaceAll("Администратор: ", "").trim();
-                    if (dbIndex == dbIndex && username.equals(dbUser) && password.equals(dbPassword)) {
+                    if (username.equals(dbUser) && password.equals(dbPassword)) {
                         if (DBIsAdmin.equals("true")) {
                             correctLogin = true;
                             userType = "admin";
