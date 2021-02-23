@@ -1,7 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Cars {
@@ -109,11 +108,9 @@ public class Cars {
             System.out.println("Введите цвет: ");
             String color = input.nextLine();
             setColor(color);
-            System.out.println("Введите год выпуска: ");
-            int year = input.nextInt();
+            int year = Checks.checkCarsYears(input); //введите год выпуска
             setYear(year);
-            System.out.println("Введите цену: ");
-            int price = input.nextInt();
+            int price = Checks.checkCarsPrice(input); //введите цену
             setPrice(price);
 
             listLength++;

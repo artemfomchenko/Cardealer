@@ -25,7 +25,9 @@ public class MenuFunctions {
                     6. Выход
                     """);
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberAdm = in.nextInt();
+
             switch (numberAdm) {
                 case 1:
                     listAudi = outCars.getCarsList(pathToAudiFile);
@@ -71,6 +73,7 @@ public class MenuFunctions {
 
                     4. Назад""");
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberSalon = in.nextInt();
             switch (numberSalon) {
                 case 1:
@@ -113,6 +116,7 @@ public class MenuFunctions {
                                                             
                     6. Назад""");
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberSortCar = in.nextInt();
             switch (numberSortCar) {
                 case 1:
@@ -159,6 +163,7 @@ public class MenuFunctions {
 
                     4. Назад""");
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberSalon = in.nextInt();
             switch (numberSalon) {
                 case 1:
@@ -193,6 +198,7 @@ public class MenuFunctions {
 
                     4. Назад""");
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberSalon = in.nextInt();
             switch (numberSalon) {
                 case 1:
@@ -228,6 +234,7 @@ public class MenuFunctions {
 
                     4. Назад""");
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberSalonDel = in.nextInt();
             switch (numberSalonDel) {
                 case 1:
@@ -269,6 +276,7 @@ public class MenuFunctions {
                                                             
                     4. Назад""");
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberRes = in.nextInt();
             switch (numberRes) {
                 case 1:
@@ -301,6 +309,7 @@ public class MenuFunctions {
                 1. Снять резервацию авто
                 2. Назад""");
         Scanner in = new Scanner(System.in);
+        Checks.checkIntegerInput(in);
         int numberDelResVw = in.nextInt();
         switch (numberDelResVw) {
             case 1:
@@ -317,6 +326,7 @@ public class MenuFunctions {
         int option = 0;
         while (option != 5) {
             Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
             outUsers.printAllUser(listUsers);//2
             System.out.println("""

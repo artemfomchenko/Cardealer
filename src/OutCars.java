@@ -53,18 +53,6 @@ public class OutCars {
         Writer write = new FileWriter(pathToFile);
         Scanner numberDelete = new Scanner(System.in);
         int indexDelete = Checks.checkCarsIndexRange(numberDelete, carsList);
-//        do {
-//            System.out.println("Введите индекс удаляемого автомобиля:");
-//            while (!numberDelete.hasNextInt()) {
-//                System.out.println("Неверный формат ввода!");
-//                numberDelete.next();
-//            }
-//            indexDelete = numberDelete.nextInt();
-//            if (indexDelete <= 0 || indexDelete > carsList.size()){
-//                System.out.println("Такого индекса не существует!");
-//            }
-//        } while (indexDelete <= 0 || indexDelete > carsList.size());
-
         int firstCarIndex = 1;
         for (Cars value : carsList) {
             if (value.getIndex() != indexDelete) {
@@ -80,7 +68,7 @@ public class OutCars {
         Writer write = new FileWriter(pathToFile);
         Scanner numberReservation = new Scanner(System.in);
         System.out.println("Введите индекс автомобиля:");
-        int indexReservation = numberReservation.nextInt();
+        int indexReservation = Checks.checkCarsIndexRange(numberReservation, carsList);
         int firstCarIndex = 1;
         for (Cars value : carsList) {
             if (value.getIndex() == indexReservation && !value.isOrder()) {
@@ -102,17 +90,17 @@ public class OutCars {
 
     public void removeReservation(ArrayList<Cars> carsList, String pathToFile) throws IOException {
         Writer write = new FileWriter(pathToFile);
-        Scanner numberDeleteReservation = new Scanner(System.in);
+        Scanner numberDelete = new Scanner(System.in);
         System.out.println("Введите индекс автомобиля:");
-        int indexReservation = numberDeleteReservation.nextInt();
+        int indexDelete = Checks.checkCarsIndexRange(numberDelete, carsList);
         int firstCarIndex = 1;
         for (Cars value : carsList) {
-            if (value.getIndex() == indexReservation && value.isOrder()) {
+            if (value.getIndex() == indexDelete && value.isOrder()) {
                 value.setOrder(false);
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
                 System.out.println("Резерв снят.");
-            } else if (value.getIndex() == indexReservation && !value.isOrder()) {
+            } else if (value.getIndex() == indexDelete && !value.isOrder()) {
                 System.err.println("Выбранный авто не находится в резерве!");
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;

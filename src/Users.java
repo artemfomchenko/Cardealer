@@ -66,12 +66,9 @@ public class Users {
 
     public void registration(int userLength) throws IOException {
         Scanner input = new Scanner(System.in);
-        System.out.println("Введите имя пользователя:");
-        setUserName(input.nextLine());
-        System.out.println("Введите пароль:");
-        setPassword(input.nextLine());
-        System.out.println("Введите свой номер телефона с кодом:");
-        setPhoneNumber(input.nextLine());
+        setUserName(Checks.checkUsersLogin(input)); //Введите имя пользователя
+        setPassword(Checks.checkUsersPassword(input)); //введите пароль
+        setPhoneNumber(Checks.checkUsersPhoneNumber(input)); //Введите свой номер телефона
         userLength++;
 
         String pathToUserList = "E://IdeaProjects/CarDealer/Users/listOfUsers.txt";

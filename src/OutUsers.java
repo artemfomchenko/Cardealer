@@ -56,7 +56,7 @@ public class OutUsers {
         Writer write = new FileWriter(pathToUserFile);
         Scanner numAdm = new Scanner(System.in);
         System.out.println("Введите индекс аккаунта:");
-        int indexAddAdmin = numAdm.nextInt();
+        int indexAddAdmin = Checks.checkUsersIndexRange(numAdm, listUsers);
         int firstUserIndex = 1;
         for (Users value : listUsers) {
             if (value.getIndex() == indexAddAdmin && !value.isAdmin()) {
@@ -81,7 +81,7 @@ public class OutUsers {
         Writer write = new FileWriter(pathToUserFile);
         Scanner numAdm = new Scanner(System.in);
         System.out.println("Введите индекс аккаунта:");
-        int indexRemoveAdmin = numAdm.nextInt();
+        int indexRemoveAdmin = Checks.checkUsersIndexRange(numAdm, listUsers);
         int firstUserIndex = 1;
         for (Users value : listUsers) {
             if (value.getIndex() == indexRemoveAdmin && value.isAdmin()) {
