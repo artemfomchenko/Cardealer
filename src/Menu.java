@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Menu {
     public static void menu() throws IOException {
-        //MenuFunctions menuFunctions = new MenuFunctions();
         OutCars outCars = new OutCars();
         OutUsers outUsers = new OutUsers();
 
@@ -39,7 +38,7 @@ public class Menu {
                     } else if (userType.equals("user")) {
                         MenuFunctions.userMenu(outCars, listAudi, listBmw, listVolkswagen, currentUser);
                     } else {
-                        System.out.println("Неверный логин или пароль. Попробуйте снова.");
+                        System.err.println("Неверный логин или пароль. Попробуйте снова.");
                         break;
                     }
                     break;
@@ -53,7 +52,7 @@ public class Menu {
                     option = numberMenu;
                     break;
                 default:
-                    System.out.println("Введено не верное значение.");
+                    System.err.println("Введено не верное значение.");
             }
         }
     }

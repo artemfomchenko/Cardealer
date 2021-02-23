@@ -50,7 +50,7 @@ public class OutCars {
             if (value.isOrder()) {
                 System.err.println("Забронирован: " +
                         "\n" + "Id аккаунта: " + value.getOrderIndex() +
-                        "\n" +"Логин: " + value.getOrderUser());
+                        "\n" + "Логин: " + value.getOrderUser());
                 System.out.println(value);
             }
         }
@@ -85,7 +85,7 @@ public class OutCars {
                 firstCarIndex++;
                 System.out.println("Выбранный авто зарезервирован!");
             } else if (value.getIndex() == indexReservation && value.isOrder()) {
-                System.err.println("Выбранный авто уже зарезервирован!");
+                System.err.println("Выбранный авто не доступен к резервированию!");
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
             } else {

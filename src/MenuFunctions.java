@@ -51,7 +51,7 @@ public class MenuFunctions {
                     option = numberAdm;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
@@ -98,7 +98,7 @@ public class MenuFunctions {
                     option = numberSalon;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
@@ -112,7 +112,7 @@ public class MenuFunctions {
             System.out.println("""
                     1. Показать список авто
                     2. Забронировать авто
-                    
+                                        
                     Упорядочить по:
                     3. Модели
                     4. Цвету
@@ -131,22 +131,22 @@ public class MenuFunctions {
                     outCars.reservation(listCars, pathToCarFile, currentUser);
                     break;
                 case 3:
-                    System.out.println("Сортировка по модели");
+                    System.out.println("=== Сортировка по модели ===");
                     listCars.sort(sortModel);
                     outCars.printAllCars(listCars);
                     break;
                 case 4:
-                    System.out.println("Сортировка по цвету");
+                    System.out.println("=== Сортировка по цвету ===");
                     listCars.sort(sortColor);
                     outCars.printAllCars(listCars);
                     break;
                 case 5:
-                    System.out.println("Сортировка по году выпуска");
+                    System.out.println("=== Сортировка по году выпуска ===");
                     listCars.sort(sortYear);
                     outCars.printAllCars(listCars);
                     break;
                 case 6:
-                    System.out.println("Сортировка по цене");
+                    System.out.println("=== Сортировка по цене ===");
                     listCars.sort(sortPrice);
                     outCars.printAllCars(listCars);
                     break;
@@ -154,7 +154,7 @@ public class MenuFunctions {
                     option = numberSortCar;
                     break;
                 default:
-                    System.out.println("Введите правильное значение");
+                    System.err.println("Введите правильное значение");
             }
         }
     }
@@ -190,7 +190,7 @@ public class MenuFunctions {
                     option = numberSalon;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
@@ -225,7 +225,7 @@ public class MenuFunctions {
                     option = numberSalon;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
@@ -267,7 +267,7 @@ public class MenuFunctions {
                     option = numberSalonDel;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
@@ -306,12 +306,13 @@ public class MenuFunctions {
                     option = numberRes;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
 
-    public static void removeReservationAdminMenu(OutCars outCars, ArrayList<Cars> listCars, String pathToCarFile) throws IOException {
+    public static void removeReservationAdminMenu(OutCars outCars, ArrayList<Cars> listCars,
+                                                  String pathToCarFile) throws IOException {
         System.out.println("""
                                                                 
                 1. Снять резервацию авто
@@ -326,7 +327,7 @@ public class MenuFunctions {
             case 2:
                 break;
             default:
-                System.out.println("Введите верное значение.");
+                System.err.println("Введите верное значение.");
         }
     }
 
@@ -386,7 +387,7 @@ public class MenuFunctions {
                     option = numberUser;
                     break;
                 default:
-                    System.out.println("Введите верное значение.");
+                    System.err.println("Введите верное значение.");
             }
         }
     }
