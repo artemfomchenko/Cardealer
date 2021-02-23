@@ -334,13 +334,6 @@ public class MenuFunctions {
     public static void listUsersAdminMenu(OutUsers outUsers) throws IOException {
         int option = 0;
         while (option != 6) {
-            ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
-            Scanner in = new Scanner(System.in);
-            //Checks.checkIntegerInput(in); ???????????????????????????????????????????
-            while (!in.hasNextInt()) {
-                System.out.println("Неверный формат ввода! Вводимое значение должно быть целым числом!");
-                in.next();
-            }
             System.out.println("""
                     Выберите действие:\s
                     1. Вывести список аккаунтов
@@ -351,6 +344,9 @@ public class MenuFunctions {
                                                             
                     6. Назад
                     """);
+            ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
+            Scanner in = new Scanner(System.in);
+            Checks.checkIntegerInput(in);
             int numberUser = in.nextInt();
             switch (numberUser) {
                 case 1:
