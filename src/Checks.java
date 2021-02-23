@@ -31,6 +31,19 @@ public class Checks {
         return indexDelete;
     }
 
+    public static int checkUsersIndexMakeAdmin(Scanner in, ArrayList<Users> userList){
+        int numAdmin;
+        do {
+            System.out.println("Введите индекс аккаунта:");
+            checkIntegerInput(in);
+            numAdmin = in.nextInt();
+            if (numAdmin <= 0 || numAdmin > userList.size()){
+                System.out.println("Такого индекса не существует!");
+            }
+        } while (numAdmin <= 0 || numAdmin > userList.size());
+        return numAdmin;
+    }
+
     public static int checkCarsYears(Scanner input){
         int year;
         do {

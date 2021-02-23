@@ -1,4 +1,5 @@
 public class CurrentUser {
+
     private String index;
     private String userName;
 

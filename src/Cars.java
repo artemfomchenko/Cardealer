@@ -29,7 +29,7 @@ public class Cars {
                 + "Бронирование: " + order + "\n";
     }
 
-    public String toStringAdmin(int listLength) {//Запись
+    public String toStringAdmin(int listLength) {
         return "Индекс: " + listLength + "\n"
                 + "Марка: " + brand + "\n"
                 + "Модель: " + model + "\n"
@@ -153,7 +153,7 @@ public class Cars {
                     answerCheck = true;
 
                 } else {
-                    System.out.println("Введите правильное значение: Да/Нет");
+                    System.err.println("Введите правильное значение: Да/Нет");
                     answerCheck = false;
                 }
             }

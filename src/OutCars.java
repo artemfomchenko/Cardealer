@@ -48,8 +48,9 @@ public class OutCars {
     public void printReservationCars(ArrayList<Cars> carsList) {
         for (Cars value : carsList) {
             if (value.isOrder()) {
-                System.out.println("Индекс и логин пользователя, забронировшего авто: Индекс:" + value.getOrderIndex() +
-                        " Логин: " + value.getOrderUser());
+                System.err.println("Забронирован: " +
+                        "\n" + "Id аккаунта: " + value.getOrderIndex() +
+                        "\n" +"Логин: " + value.getOrderUser());
                 System.out.println(value);
             }
         }
@@ -98,7 +99,6 @@ public class OutCars {
     public void removeReservation(ArrayList<Cars> carsList, String pathToFile) throws IOException {
         Writer write = new FileWriter(pathToFile);
         Scanner numberDelete = new Scanner(System.in);
-        System.out.println("Введите индекс автомобиля:");
         int indexDelete = Checks.checkCarsIndexRange(numberDelete, carsList);
         int firstCarIndex = 1;
         for (Cars value : carsList) {

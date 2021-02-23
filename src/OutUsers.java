@@ -54,9 +54,8 @@ public class OutUsers {
 
     public void makeAdmin(ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
         Writer write = new FileWriter(pathToUserFile);
-        Scanner numAdm = new Scanner(System.in);
-        System.out.println("Введите индекс аккаунта:");
-        int indexAddAdmin = Checks.checkUsersIndexRange(numAdm, listUsers);
+        Scanner numAdmin = new Scanner(System.in);
+        int indexAddAdmin = Checks.checkUsersIndexMakeAdmin(numAdmin, listUsers);
         int firstUserIndex = 1;
         for (Users value : listUsers) {
             if (value.getIndex() == indexAddAdmin && !value.isAdmin()) {
@@ -80,7 +79,6 @@ public class OutUsers {
     public void removeAdmin(ArrayList<Users> listUsers, String pathToUserFile) throws IOException {
         Writer write = new FileWriter(pathToUserFile);
         Scanner numAdm = new Scanner(System.in);
-        System.out.println("Введите индекс аккаунта:");
         int indexRemoveAdmin = Checks.checkUsersIndexRange(numAdm, listUsers);
         int firstUserIndex = 1;
         for (Users value : listUsers) {

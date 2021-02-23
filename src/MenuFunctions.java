@@ -20,7 +20,7 @@ public class MenuFunctions {
                     2. Добавить автомобиль
                     3. Удалить автомобиль
                     4. Список забронированных автомобилей
-                    5. Список зарегестрированных пользователей
+                    5. Действия с аккаунтами
                                                     
                     6. Выход
                     """);
@@ -108,45 +108,49 @@ public class MenuFunctions {
                                            SortPrice sortPrice, String pathToCarFile,
                                            CurrentUser currentUser) throws IOException {
         int option = 0;
-        while (option != 6) {
-            outCars.printAllCars(listCars);
+        while (option != 7) {
             System.out.println("""
+                    1. Показать список авто
+                    2. Забронировать авто
+                    
                     Упорядочить по:
-                    1. Модели.
-                    2. Цвету.
-                    3. Году выпуска.
-                    4. Цене.
-                    5. Забронировать авто.\s
+                    3. Модели
+                    4. Цвету
+                    5. Году выпуска
+                    6. Цене\s
                                                             
-                    6. Назад""");
+                    7. Назад""");
             Scanner in = new Scanner(System.in);
             Checks.checkIntegerInput(in);
             int numberSortCar = in.nextInt();
             switch (numberSortCar) {
                 case 1:
+                    outCars.printAllCars(listCars);
+                    break;
+                case 2:
+                    outCars.reservation(listCars, pathToCarFile, currentUser);
+                    break;
+                case 3:
                     System.out.println("Сортировка по модели");
                     listCars.sort(sortModel);
                     outCars.printAllCars(listCars);
                     break;
-                case 2:
+                case 4:
                     System.out.println("Сортировка по цвету");
                     listCars.sort(sortColor);
                     outCars.printAllCars(listCars);
                     break;
-                case 3:
+                case 5:
                     System.out.println("Сортировка по году выпуска");
                     listCars.sort(sortYear);
                     outCars.printAllCars(listCars);
                     break;
-                case 4:
+                case 6:
                     System.out.println("Сортировка по цене");
                     listCars.sort(sortPrice);
                     outCars.printAllCars(listCars);
                     break;
-                case 5:
-                    outCars.reservation(listCars, pathToCarFile, currentUser);
-                    break;
-                case 6:
+                case 7:
                     option = numberSortCar;
                     break;
                 default:
@@ -328,47 +332,57 @@ public class MenuFunctions {
 
     public static void listUsersAdminMenu(OutUsers outUsers) throws IOException {
         int option = 0;
-        while (option != 5) {
-            Scanner in = new Scanner(System.in);
-            Checks.checkIntegerInput(in);
+        while (option != 6) {
             ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
-            outUsers.printAllUser(listUsers);//2
+            Scanner in = new Scanner(System.in);
+            //Checks.checkIntegerInput(in);
+            while (!in.hasNextInt()) {
+                System.out.println("Неверный формат ввода! Вводимое значение должно быть целым числом!");
+                in.next();
+            }
             System.out.println("""
                     Выберите действие:\s
-                    1. Сортировка по логину
-                    2. Удалить пользователя
-                    3. Дать права администратора
-                    4. Удалить права администратора
+                    1. Вывести список аккаунтов
+                    2. Отображение списка упорядоченного по логину
+                    3. Удалить пользователя
+                    4. Дать права администратора
+                    5. Удалить права администратора
                                                             
-                    5. Назад
+                    6. Назад
                     """);
             int numberUser = in.nextInt();
             switch (numberUser) {
                 case 1:
+                    outUsers.printAllUser(listUsers);
+                    break;
+                case 2:
                     SortLogin sortLogin = new SortLogin();
                     listUsers.sort(sortLogin);
                     System.out.println("=== Отсортированный список ===");
-                    outUsers.printAllUser(listUsers);//1
+                    outUsers.printAllUser(listUsers);
                     break;
-                case 2:
+                case 3:
+                    outUsers.printAllUser(listUsers);
                     outUsers.removeUser(listUsers, pathToUserFile);
                     System.out.println("=== Список обновлён ===");
                     listUsers = outUsers.getUserList(pathToUserFile);
                     outUsers.printAllUser(listUsers);
                     break;
-                case 3:
+                case 4:
+                    outUsers.printAllUser(listUsers);
                     outUsers.makeAdmin(listUsers, pathToUserFile);
                     System.out.println("=== Список обновлён ===");
                     listUsers = outUsers.getUserList(pathToUserFile);
                     outUsers.printAllUser(listUsers);
                     break;
-                case 4:
+                case 5:
+                    outUsers.printAllUser(listUsers);
                     outUsers.removeAdmin(listUsers, pathToUserFile);
                     System.out.println("=== Список обновлён ===");
                     listUsers = outUsers.getUserList(pathToUserFile);
                     outUsers.printAllUser(listUsers);
                     break;
-                case 5:
+                case 6:
                     option = numberUser;
                     break;
                 default:
