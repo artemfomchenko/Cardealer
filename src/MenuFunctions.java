@@ -335,7 +335,7 @@ public class MenuFunctions {
         while (option != 6) {
             ArrayList<Users> listUsers = outUsers.getUserList(pathToUserFile);
             Scanner in = new Scanner(System.in);
-            //Checks.checkIntegerInput(in);
+            //Checks.checkIntegerInput(in); ???????????????????????????????????????????
             while (!in.hasNextInt()) {
                 System.out.println("Неверный формат ввода! Вводимое значение должно быть целым числом!");
                 in.next();
