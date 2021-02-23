@@ -12,6 +12,11 @@ public class Cars {
     private int year;
     private int price;
     private boolean order = false;
+    private String orderIndex = "empty";
+    private String orderUser = "empty";
+
+    public Cars() {
+    }
 
     @Override
     public String toString() {
@@ -31,7 +36,9 @@ public class Cars {
                 + "Цвет: " + color + "\n"
                 + "Год выпуска: " + year + "\n"
                 + "Стоимость: " + price + "\n"
-                + "Бронирование: " + order + "\n";
+                + "Бронирование: " + order + "\n"
+                + "Индекс пользователя: " + orderIndex + "\n"
+                + "Логин пользователя: " + orderUser + "\n";
     }
 
 
@@ -89,6 +96,22 @@ public class Cars {
 
     public void setOrder(boolean order) {
         this.order = order;
+    }
+
+    public String getOrderUser() {
+        return orderUser;
+    }
+
+    public void setOrderUser(String orderUser) {
+        this.orderUser = orderUser;
+    }
+
+    public String getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(String orderIndex) {
+        this.orderIndex = orderIndex;
     }
 
 

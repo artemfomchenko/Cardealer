@@ -31,12 +31,13 @@ public class Menu {
                 case 1:
                     System.out.println("Вход в систему... \n");
                     Users user = new Users();
-                    String userType = user.login();
+                    CurrentUser currentUser = new CurrentUser();
+                    String userType = user.login(currentUser);
 
                     if (userType.equals("admin")) {
                         MenuFunctions.adminMenu(outCars, outUsers, listAudi, listBmw, listVolkswagen);
                     } else if (userType.equals("user")) {
-                        MenuFunctions.userMenu(outCars, listAudi, listBmw, listVolkswagen);
+                        MenuFunctions.userMenu(outCars, listAudi, listBmw, listVolkswagen, currentUser);
                     } else {
                         System.out.println("Неверный логин или пароль. Попробуйте снова.");
                         break;

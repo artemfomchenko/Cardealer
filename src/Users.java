@@ -79,7 +79,7 @@ public class Users {
                 "Выберите действие:");
     }
 
-    public String login() {
+    public String login(CurrentUser currentUser) {
         boolean correctLogin = false;
         String userType = "";
         try {
@@ -107,6 +107,8 @@ public class Users {
                         } else if (DBIsAdmin.equals("false")) {
                             correctLogin = true;
                             userType = "user";
+                            currentUser.setIndex(Integer.toString(dbIndex));
+                            currentUser.setUserName(dbUser);
                         }
                     }
                 }

@@ -26,6 +26,10 @@ public class OutCars {
                             replaceAll("Стоимость: ", "").trim()));
                     cars.setOrder(Boolean.parseBoolean(read.readLine().
                             replaceAll("Бронирование: ", "").trim()));
+                    cars.setOrderIndex(read.readLine().
+                            replaceAll("Индекс пользователя: ", "").trim());
+                    cars.setOrderUser(read.readLine().
+                            replaceAll("Логин пользователя: ", "").trim());
                     carsList.add(cars);
                 }
             }
@@ -44,6 +48,8 @@ public class OutCars {
     public void printReservationCars(ArrayList<Cars> carsList) {
         for (Cars value : carsList) {
             if (value.isOrder()) {
+                System.out.println("Индекс и логин пользователя, забронировшего авто: Индекс:" + value.getOrderIndex() +
+                        " Логин: " + value.getOrderUser());
                 System.out.println(value);
             }
         }
@@ -64,15 +70,16 @@ public class OutCars {
         System.out.println("Авто удалено из базы.");
     }
 
-    public void reservation(ArrayList<Cars> carsList, String pathToFile) throws IOException {
+    public void reservation(ArrayList<Cars> carsList, String pathToFile, CurrentUser currentUser) throws IOException {
         Writer write = new FileWriter(pathToFile);
         Scanner numberReservation = new Scanner(System.in);
-        System.out.println("Введите индекс автомобиля:");
         int indexReservation = Checks.checkCarsIndexRange(numberReservation, carsList);
         int firstCarIndex = 1;
         for (Cars value : carsList) {
             if (value.getIndex() == indexReservation && !value.isOrder()) {
                 value.setOrder(true);
+                value.setOrderIndex(currentUser.getIndex());
+                value.setOrderUser(currentUser.getUserName());
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
                 System.out.println("Выбранный авто зарезервирован!");
@@ -97,6 +104,8 @@ public class OutCars {
         for (Cars value : carsList) {
             if (value.getIndex() == indexDelete && value.isOrder()) {
                 value.setOrder(false);
+                value.setOrderUser("empty");
+                value.setOrderIndex("empty");
                 write.write("{\n" + value.toStringAdmin(firstCarIndex) + "},\n");
                 firstCarIndex++;
                 System.out.println("Резерв снят.");

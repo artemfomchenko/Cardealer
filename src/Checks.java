@@ -60,12 +60,15 @@ public class Checks {
     public static String checkUsersLogin(Scanner input){
         Users users = new Users();
         String userName;
+        boolean sameUserExist;
         do {
             System.out.println("Введите имя пользователя: ");
+
             userName = input.nextLine();
+            sameUserExist = false;
             if (userName.length() > 20 || userName.length() < 3){
                 System.out.println("Имя пользователя должно состоять из не менее 3 и не более 20 символов");
-            }
+            }else sameUserExist = true;
             try {
                 String pathToUserList = "E://IdeaProjects/CarDealer/Users/listOfUsers.txt";
                 BufferedReader read = new BufferedReader(new FileReader(pathToUserList));
@@ -76,13 +79,14 @@ public class Checks {
                         String dbUser = read.readLine().replaceAll("Логин: ", "").trim();
                         if (userName.equals(dbUser)) {
                             System.out.println("Такое имя пользователя уже существует.");
-                        }
+                            sameUserExist = false;
+                        }else sameUserExist = true;
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } while (userName.length() > 20 || userName.length() < 3);
+        } while (!sameUserExist);
         return userName;
     }
 
@@ -94,7 +98,7 @@ public class Checks {
             if (password.length() > 20 || password.length() < 6){
                 System.out.println("Пароль должен состоять из не менее 6 и не более 20 символов");
             }
-        } while (password.length() > 20 || password.length() < 3);
+        } while (password.length() > 20 || password.length() < 6);
         return password;
     }
 

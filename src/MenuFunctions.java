@@ -57,7 +57,7 @@ public class MenuFunctions {
     }
 
     public static void userMenu(OutCars outCars, ArrayList<Cars> listAudi, ArrayList<Cars> listBmw,
-                                ArrayList<Cars> listVolkswagen) throws IOException {
+                                ArrayList<Cars> listVolkswagen, CurrentUser currentUser) throws IOException {
         SortModel sortModel = new SortModel();
         SortColor sortColor = new SortColor();
         SortYear sortYear = new SortYear();
@@ -79,17 +79,20 @@ public class MenuFunctions {
                 case 1:
                     System.out.println("*** Автосалон Audi ***");
                     listAudi = outCars.getCarsList(pathToAudiFile);
-                    carShowRoomUserMenu(outCars, listAudi, sortModel, sortColor, sortYear, sortPrice, pathToAudiFile);
+                    carShowRoomUserMenu(outCars, listAudi, sortModel, sortColor, sortYear,
+                            sortPrice, pathToAudiFile, currentUser);
                     break;
                 case 2:
                     System.out.println("*** Автосалон BMW ***");
                     listBmw = outCars.getCarsList(pathToBMWFile);
-                    carShowRoomUserMenu(outCars, listBmw, sortModel, sortColor, sortYear, sortPrice, pathToBMWFile);
+                    carShowRoomUserMenu(outCars, listBmw, sortModel, sortColor, sortYear,
+                            sortPrice, pathToBMWFile, currentUser);
                     break;
                 case 3:
                     System.out.println("*** Автосалон Volkswagen ***");
                     listVolkswagen = outCars.getCarsList(pathToVolkswagenFile);
-                    carShowRoomUserMenu(outCars, listVolkswagen, sortModel, sortColor, sortYear, sortPrice, pathToVolkswagenFile);
+                    carShowRoomUserMenu(outCars, listVolkswagen, sortModel, sortColor, sortYear,
+                            sortPrice, pathToVolkswagenFile, currentUser);
                     break;
                 case 4:
                     option = numberSalon;
@@ -102,7 +105,8 @@ public class MenuFunctions {
 
     public static void carShowRoomUserMenu(OutCars outCars, ArrayList<Cars> listCars, SortModel sortModel,
                                            SortColor sortColor, SortYear sortYear,
-                                           SortPrice sortPrice, String pathToCarFile) throws IOException {
+                                           SortPrice sortPrice, String pathToCarFile,
+                                           CurrentUser currentUser) throws IOException {
         int option = 0;
         while (option != 6) {
             outCars.printAllCars(listCars);
@@ -140,7 +144,7 @@ public class MenuFunctions {
                     outCars.printAllCars(listCars);
                     break;
                 case 5:
-                    outCars.reservation(listCars, pathToCarFile);
+                    outCars.reservation(listCars, pathToCarFile, currentUser);
                     break;
                 case 6:
                     option = numberSortCar;
