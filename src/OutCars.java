@@ -40,9 +40,7 @@ public class OutCars {
     }
 
     public void printAllCars(ArrayList<Cars> carsList) {
-        for (Cars value : carsList) {
-            System.out.println(value);
-        }
+        carsList.forEach(System.out::println);
     }
 
     public void printReservationCars(ArrayList<Cars> carsList) {

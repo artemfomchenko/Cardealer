@@ -2,6 +2,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/***
+ * @author a.fomchenko
+ * @since 01/01/2021
+ */
 public class Menu {
     public static void menu() throws IOException {
         OutCars outCars = new OutCars();

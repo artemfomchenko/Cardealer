@@ -1,6 +1,6 @@
 import java.util.Comparator;
 
-public class SortColor implements Comparator  <Cars>{
+public class SortColor implements Comparator<Cars>{
     @Override
     public int compare(Cars o1, Cars o2) {
         return o1.getColor().compareTo(o2.getColor());

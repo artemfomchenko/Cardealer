@@ -159,7 +159,9 @@ public class MenuFunctions {
         }
     }
 
-    public static void listCarsAdminMenu(OutCars outCars, ArrayList<Cars> listAudi, ArrayList<Cars> listBmw,
+    public static void listCarsAdminMenu(OutCars outCars,
+                                         ArrayList<Cars> listAudi,
+                                         ArrayList<Cars> listBmw,
                                          ArrayList<Cars> listVolkswagen) {
         int option = 0;
         while (option != 4) {
