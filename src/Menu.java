@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 /***
  * @author a.fomchenko
- * @since 01/01/2021
+ * @since 01/02/2021
  */
 public class Menu {
     public static void menu() throws IOException {
